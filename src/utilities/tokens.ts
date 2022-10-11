@@ -22,18 +22,20 @@ const tokens = {
   },
 
   fontSizes: {
-    SM: 14,
-    MD: 20,
+    XSM: 12,
+    SM: 16,
+    MD: 24,
     LG: 32,
-    XL: 40,
+    XL: 48,
   },
 
   borderRadius: 20,
 
   spacing: {
-    tiny: 5,
-    small: 10,
+    quarter: 5,
+    half: 10,
     regular: 20,
+    double: 40,
   },
 };
 
