@@ -4,7 +4,7 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AppContext from '../utilities/AppContext';
 import tokens from '../utilities/tokens';
-import {CalorieEntry} from '../utilities/types';
+import {CalorieEntry} from '../utilities/Types';
 
 function RecentEntries() {
   const appContext = useContext(AppContext);
@@ -41,7 +41,7 @@ function RecentEntries() {
       <FlatList
         data={calorieEntries}
         renderItem={renderItem}
-        persistentScrollbar={true}
+        persistentScrollbar={false}
       />
     </View>
   );
@@ -49,7 +49,7 @@ function RecentEntries() {
 
 const styles = StyleSheet.create({
   card: {
-    height: 550,
+    height: 300,
     width: tokens.fullWidth,
     borderRadius: tokens.borderRadius,
     backgroundColor: tokens.colors.lowElevation,

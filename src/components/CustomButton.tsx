@@ -8,7 +8,7 @@ export interface CustomButtonProps {
   backgroundColor: string;
 }
 
-const CustomButton = (props: CustomButtonProps) => {
+function CustomButton(props: CustomButtonProps) {
   return (
     <TouchableOpacity
       style={[{backgroundColor: props.backgroundColor}, styles.button]}
@@ -18,7 +18,7 @@ const CustomButton = (props: CustomButtonProps) => {
       {props.contentNode}
     </TouchableOpacity>
   );
-};
+}
 
 const styles = StyleSheet.create({
   button: {

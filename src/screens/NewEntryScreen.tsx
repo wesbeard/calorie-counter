@@ -7,6 +7,7 @@ import {TextInput} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import CustomButton from '../components/CustomButton';
 import {NavigationContext} from '@react-navigation/native';
+import NumberPicker from '../components/NumberPicker';
 
 function DashboardScreen() {
   const navigation = useContext<any>(NavigationContext);
@@ -17,13 +18,17 @@ function DashboardScreen() {
 
   return (
     <SafeAreaView style={styles.screen}>
+      <View style={styles.row}>
+        <NumberPicker />
+        <Text style={styles.caloriesText}>Calories</Text>
+      </View>
       <View style={styles.inputIconRow}>
         <TextInput
           mode="outlined"
           style={styles.input}
           label="Entry Name"
           theme={{
-            roundness: tokens.borderRadius,
+            roundness: tokens.borderRadius / 2,
             colors: {
               primary: tokens.colors.white,
               onSurface: tokens.colors.white,
@@ -44,7 +49,7 @@ function DashboardScreen() {
           style={styles.input}
           label="Time"
           theme={{
-            roundness: tokens.borderRadius,
+            roundness: tokens.borderRadius / 2,
             colors: {
               primary: tokens.colors.white,
               onSurface: tokens.colors.white,
@@ -61,7 +66,7 @@ function DashboardScreen() {
           style={styles.input}
           label="Date"
           theme={{
-            roundness: tokens.borderRadius,
+            roundness: tokens.borderRadius / 2,
             colors: {
               primary: tokens.colors.white,
               onSurface: tokens.colors.white,
@@ -91,12 +96,17 @@ function DashboardScreen() {
 const styles = StyleSheet.create({
   screen: {
     flexDirection: 'column',
-    padding: tokens.spacing.regular,
+    paddingHorizontal: tokens.spacing.regular,
     alignItems: 'center',
   },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  caloriesText: {
+    marginLeft: tokens.spacing.half,
+    color: tokens.colors.white,
+    fontSize: tokens.fontSizes.MD,
   },
   buttonText: {
     fontSize: tokens.fontSizes.SM,
@@ -110,8 +120,8 @@ const styles = StyleSheet.create({
   },
   input: {
     marginRight: tokens.spacing.half,
-    height: 60,
-    width: 240,
+    height: 40,
+    width: 200,
     backgroundColor: tokens.colors.surface,
   },
 });

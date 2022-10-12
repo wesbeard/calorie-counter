@@ -10,7 +10,7 @@ import tokens from './src/utilities/tokens';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AppContext from './src/utilities/AppContext';
-import {CalorieEntry} from './src/utilities/types';
+import {CalorieEntry} from './src/utilities/Types';
 import {TEST_DATA} from './src/utilities/TestData';
 import NewEntryScreen from './src/screens/NewEntryScreen';
 
@@ -19,7 +19,7 @@ const Stack = createNativeStackNavigator();
 const App = () => {
   const [calorieEntries, setCalorieEntries] =
     useState<CalorieEntry[]>(TEST_DATA);
-  const [totalCalories, setTotalCalories] = useState(0);
+  const [totalCalories, setTotalCalories] = useState(1000);
   const [calorieGoal, setCalorieGoal] = useState(2000);
   const appVariables = {
     calorieEntries,
@@ -37,6 +37,7 @@ const App = () => {
           <Stack.Navigator
             screenOptions={{
               title: '',
+              headerShadowVisible: false,
               contentStyle: {
                 backgroundColor: tokens.colors.surface,
               },

@@ -9,6 +9,8 @@ const tokens = {
     dark: '#F44336',
     light: '#FFCDD2',
     white: '#FFFFFF',
+    lightGray: '#B4B4B4',
+    darkGray: '#797979',
   },
 
   fonts: {

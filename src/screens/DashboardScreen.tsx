@@ -19,13 +19,16 @@ function DashboardScreen() {
       <Icon name="food-outline" size={36} color={tokens.colors.light} />
     </View>
   );
+
   return (
     <SafeAreaView>
       <View style={styles.container}>
         <View style={styles.totalCaloriesContainer}>
           <Text style={styles.mediumText}>Todays Calories</Text>
           <Text style={styles.extraLargeText}>{totalCalories}</Text>
-          <Text style={styles.smallText}>51% of</Text>
+          <Text style={styles.smallText}>
+            {(totalCalories / calorieGoal) * 100}% of
+          </Text>
           <Text style={styles.smallText}>{calorieGoal} Daily</Text>
         </View>
         <RecentEntries />
