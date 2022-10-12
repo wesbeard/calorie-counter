@@ -1,4 +1,4 @@
-import {CalorieEntry} from './types';
+import {CalorieEntry} from './Types';
 
 export const TEST_DATA: CalorieEntry[] = [
   {
@@ -19,6 +19,13 @@ export const TEST_DATA: CalorieEntry[] = [
     key: 2,
     number: 750,
     label: 'Dinner',
+    timestamp: new Date(),
+    icon: 'food-outline',
+  },
+  {
+    key: 3,
+    number: 100,
+    label: 'Snack',
     timestamp: new Date(),
     icon: 'food-outline',
   },

@@ -6,6 +6,8 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AppContext from '../utilities/AppContext';
 import RecentEntries from '../components/RecentEntries';
 import {NavigationContext} from '@react-navigation/native';
+import Card from '../components/Card';
+import {ScrollView} from 'react-native-gesture-handler';
 
 function DashboardScreen() {
   const navigation = React.useContext<any>(NavigationContext);
@@ -22,7 +24,7 @@ function DashboardScreen() {
 
   return (
     <SafeAreaView>
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <View style={styles.totalCaloriesContainer}>
           <Text style={styles.mediumText}>Todays Calories</Text>
           <Text style={styles.extraLargeText}>{totalCalories}</Text>
@@ -32,37 +34,52 @@ function DashboardScreen() {
           <Text style={styles.smallText}>{calorieGoal} Daily</Text>
         </View>
         <RecentEntries />
-        <View style={styles.FAB}>
-          <CustomButton
-            contentNode={buttonContent}
-            onPress={() => {
-              navigation.navigate('New Entry');
-            }}
-            backgroundColor={tokens.colors.highElevation}
-          />
-        </View>
+        <View style={styles.spacer} />
+        <Card
+          title="Weekly Calorie Totals"
+          onHeaderPress={() => {}}
+          innerContent={<View />}
+        />
+        <View style={styles.spacer} />
+        <Card
+          title="BMI Calculator"
+          onHeaderPress={() => {}}
+          innerContent={<View />}
+        />
+      </ScrollView>
+      <View style={styles.FAB}>
+        <CustomButton
+          contentNode={buttonContent}
+          onPress={() => {
+            navigation.navigate('New Entry');
+          }}
+          backgroundColor={tokens.colors.highElevation}
+        />
       </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  spacer: {
+    height: tokens.spacing.regular,
+  },
   totalCaloriesContainer: {
+    height: 200,
     marginBottom: tokens.spacing.regular,
     flexDirection: 'column',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   FAB: {
     position: 'absolute',
-    bottom: tokens.spacing.half,
+    bottom: tokens.spacing.regular,
     right: tokens.spacing.half,
   },
   container: {
     paddingHorizontal: tokens.spacing.half,
     width: tokens.fullWidth,
     height: tokens.fullHeight,
-    flexDirection: 'column',
-    alignItems: 'center',
   },
   smallText: {
     fontSize: tokens.fontSizes.SM,
