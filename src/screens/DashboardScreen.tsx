@@ -1,19 +1,16 @@
-import React, {useContext} from 'react';
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import {SafeAreaView, StyleSheet, View} from 'react-native';
 import CustomButton from '../components/CustomButton';
-import tokens from '../utilities/tokens';
+import tokens from '../utilities/Tokens';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import AppContext from '../utilities/AppContext';
 import RecentEntries from '../components/RecentEntries';
 import {NavigationContext} from '@react-navigation/native';
 import Card from '../components/Card';
 import {ScrollView} from 'react-native-gesture-handler';
+import Octagon from '../components/Octagon';
 
 function DashboardScreen() {
   const navigation = React.useContext<any>(NavigationContext);
-  const appContext = useContext(AppContext);
-  const totalCalories = appContext.totalCalories;
-  const calorieGoal = appContext.calorieGoal;
 
   let buttonContent = (
     <View style={styles.buttonContent}>
@@ -24,15 +21,9 @@ function DashboardScreen() {
 
   return (
     <SafeAreaView>
-      <ScrollView style={styles.container}>
-        <View style={styles.totalCaloriesContainer}>
-          <Text style={styles.mediumText}>Todays Calories</Text>
-          <Text style={styles.extraLargeText}>{totalCalories}</Text>
-          <Text style={styles.smallText}>
-            {(totalCalories / calorieGoal) * 100}% of
-          </Text>
-          <Text style={styles.smallText}>{calorieGoal} Daily</Text>
-        </View>
+      <ScrollView contentContainerStyle={styles.container}>
+        <Octagon />
+        <View style={styles.spacer} />
         <RecentEntries />
         <View style={styles.spacer} />
         <Card
@@ -73,6 +64,10 @@ function DashboardScreen() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    paddingBottom: tokens.spacing.double,
+    paddingHorizontal: tokens.spacing.half,
+  },
   spacer: {
     height: tokens.spacing.regular,
   },
@@ -87,23 +82,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: tokens.spacing.regular,
     right: tokens.spacing.half,
-  },
-  container: {
-    paddingHorizontal: tokens.spacing.half,
-    width: tokens.fullWidth,
-    height: tokens.fullHeight,
-  },
-  smallText: {
-    fontSize: tokens.fontSizes.SM,
-    color: tokens.colors.white,
-  },
-  mediumText: {
-    fontSize: tokens.fontSizes.MD,
-    color: tokens.colors.white,
-  },
-  extraLargeText: {
-    fontSize: tokens.fontSizes.XL,
-    color: tokens.colors.white,
   },
   buttonContent: {
     flexDirection: 'row',

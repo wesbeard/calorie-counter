@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {StyleSheet, View, FlatList, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AppContext from '../utilities/AppContext';
-import tokens from '../utilities/tokens';
+import tokens from '../utilities/Tokens';
 import {CalorieEntry} from '../utilities/Types';
 import Card from './Card';
 
@@ -52,6 +52,8 @@ function RecentEntries() {
           style={styles.list}
           data={calorieEntries}
           renderItem={renderItem}
+          indicatorStyle="white"
+          persistentScrollbar
         />
       }
     />
@@ -81,7 +83,7 @@ const styles = StyleSheet.create({
     padding: tokens.spacing.half,
   },
   iconLabelRow: {
-    paddingLeft: tokens.spacing.half,
+    paddingLeft: tokens.spacing.quarter,
     flexDirection: 'row',
     alignItems: 'center',
   },

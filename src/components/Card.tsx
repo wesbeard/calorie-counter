@@ -1,7 +1,7 @@
 import React, {ReactNode} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import tokens from '../utilities/tokens';
+import tokens from '../utilities/Tokens';
 
 export interface CardProps {
   title: string;

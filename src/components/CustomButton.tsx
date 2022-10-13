@@ -1,6 +1,6 @@
 import React, {ReactNode} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
-import tokens from '../utilities/tokens';
+import tokens from '../utilities/Tokens';
 
 export interface CustomButtonProps {
   contentNode: ReactNode;

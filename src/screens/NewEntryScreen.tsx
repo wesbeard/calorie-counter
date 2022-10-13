@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useContext} from 'react';
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import AppContext from '../utilities/AppContext';
-import tokens from '../utilities/tokens';
+import tokens from '../utilities/Tokens';
 import {TextInput} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import CustomButton from '../components/CustomButton';

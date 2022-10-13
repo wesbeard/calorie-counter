@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
-import tokens from '../utilities/tokens';
+import tokens from '../utilities/Tokens';
 import WheelPicker from 'react-native-wheely';
 
 function NumberPicker() {

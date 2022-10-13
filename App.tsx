@@ -6,7 +6,7 @@ import React, {useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import DashboardScreen from './src/screens/DashboardScreen';
-import tokens from './src/utilities/tokens';
+import tokens from './src/utilities/Tokens';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AppContext from './src/utilities/AppContext';
