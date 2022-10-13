@@ -13,21 +13,31 @@ function RecentEntries() {
   const renderItem = ({item}: {item: CalorieEntry}) => {
     return (
       <View style={styles.entryContainer}>
+        <View style={styles.calorieNumContainer}>
+          <Text style={styles.largeText}>
+            {item.number} <Text style={styles.smallText}>kCal</Text>
+          </Text>
+        </View>
+        <View style={styles.spacer} />
         <View style={styles.iconLabelRow}>
           <Icon
             style={styles.icon}
             name={item.icon}
             color={tokens.colors.light}
-            size={36}
+            size={24}
           />
-          <View style={[styles.labelDateColumn]}>
-            <Text style={styles.mediumText}>{item.label}</Text>
-            <Text style={styles.smallText}>12:15pm</Text>
-          </View>
+          <Text style={styles.mediumText}>{item.label}</Text>
         </View>
-        <Text style={styles.mediumText}>
-          {item.number} <Text style={styles.smallText}>kCal</Text>
-        </Text>
+        <View style={styles.spacer} />
+        <View style={[styles.iconLabelRow]}>
+          <Icon
+            style={styles.icon}
+            name="timetable"
+            color={tokens.colors.light}
+            size={24}
+          />
+          <Text style={styles.smallText}>12:15pm</Text>
+        </View>
       </View>
     );
   };
@@ -38,10 +48,10 @@ function RecentEntries() {
       onHeaderPress={() => {}}
       innerContent={
         <FlatList
+          horizontal={true}
           style={styles.list}
           data={calorieEntries}
           renderItem={renderItem}
-          persistentScrollbar={false}
         />
       }
     />
@@ -50,16 +60,28 @@ function RecentEntries() {
 
 const styles = StyleSheet.create({
   list: {
-    height: 250,
+    paddingBottom: tokens.spacing.half,
+  },
+  spacer: {
+    height: tokens.spacing.half,
   },
   entryContainer: {
-    paddingVertical: tokens.spacing.half,
-    paddingRight: tokens.spacing.half,
-    flexDirection: 'row',
+    minWidth: 150,
+    backgroundColor: tokens.colors.highElevation,
+    padding: tokens.spacing.half,
+    marginRight: tokens.spacing.regular,
+    borderRadius: tokens.borderRadius,
+    flexDirection: 'column',
     justifyContent: 'space-between',
+  },
+  calorieNumContainer: {
+    borderRadius: tokens.borderRadius,
+    backgroundColor: tokens.colors.lowElevation,
     alignItems: 'center',
+    padding: tokens.spacing.half,
   },
   iconLabelRow: {
+    paddingLeft: tokens.spacing.half,
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -68,6 +90,10 @@ const styles = StyleSheet.create({
   },
   icon: {
     paddingRight: tokens.spacing.half,
+  },
+  largeText: {
+    color: tokens.colors.white,
+    fontSize: tokens.fontSizes.LG,
   },
   mediumText: {
     color: tokens.colors.white,

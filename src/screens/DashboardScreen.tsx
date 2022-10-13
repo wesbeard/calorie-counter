@@ -46,6 +46,18 @@ function DashboardScreen() {
           onHeaderPress={() => {}}
           innerContent={<View />}
         />
+        <View style={styles.spacer} />
+        <Card
+          title="My Food"
+          onHeaderPress={() => {}}
+          innerContent={<View />}
+        />
+        <View style={styles.spacer} />
+        <Card
+          title="Weight Tracking"
+          onHeaderPress={() => {}}
+          innerContent={<View />}
+        />
       </ScrollView>
       <View style={styles.FAB}>
         <CustomButton
