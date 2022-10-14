@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
   },
   selectedIndicator: {
     backgroundColor: tokens.colors.surface,
-    borderTopWidth: 2,
-    borderBottomWidth: 2,
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
     borderColor: tokens.colors.dark,
     borderRadius: 0,
   },

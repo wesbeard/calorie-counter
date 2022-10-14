@@ -13,8 +13,10 @@ import AppContext from './src/utilities/AppContext';
 import {CalorieEntry} from './src/utilities/Types';
 import {TEST_DATA} from './src/utilities/TestData';
 import NewEntryScreen from './src/screens/NewEntryScreen';
+import {en, registerTranslation} from 'react-native-paper-dates';
 
 const Stack = createNativeStackNavigator();
+registerTranslation('en', en);
 
 const App = () => {
   const [calorieEntries, setCalorieEntries] =

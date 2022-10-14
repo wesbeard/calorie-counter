@@ -3,10 +3,11 @@ const tokens = {
   fullHeight: '100%',
 
   colors: {
-    surface: '#0D0D0D',
+    surface: '#000000',
     lowElevation: '#212121',
     highElevation: '#333333',
     dark: '#F44336',
+    medium: '#FF8C8C',
     light: '#FFCDD2',
     white: '#FFFFFF',
     lightGray: '#B4B4B4',

@@ -62,7 +62,7 @@ function RecentEntries() {
 
 const styles = StyleSheet.create({
   list: {
-    paddingBottom: tokens.spacing.half,
+    paddingBottom: tokens.spacing.regular,
   },
   spacer: {
     height: tokens.spacing.half,

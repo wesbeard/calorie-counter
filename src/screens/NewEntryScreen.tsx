@@ -1,95 +1,145 @@
 import React, {useState} from 'react';
 import {useContext} from 'react';
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
-import AppContext from '../utilities/AppContext';
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+} from 'react-native';
 import tokens from '../utilities/Tokens';
-import {TextInput} from 'react-native-paper';
+import {DefaultTheme, MD2DarkTheme, TextInput} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import CustomButton from '../components/CustomButton';
 import {NavigationContext} from '@react-navigation/native';
 import NumberPicker from '../components/NumberPicker';
+import {DatePickerModal, TimePickerModal} from 'react-native-paper-dates';
+import {Provider as PaperProvider} from 'react-native-paper';
 
 function DashboardScreen() {
   const navigation = useContext<any>(NavigationContext);
-  const appContext = useContext(AppContext);
-  const [number, setNumber] = useState<number | undefined>();
-  const [label, setLabel] = useState<string | undefined>();
-  const [timestamp, setTimestamp] = useState<Date | undefined>(new Date());
+  // const [number, setNumber] = useState<number>();
+  // const [label, setLabel] = useState<string | undefined>();
+  // const [timestamp, setTimestamp] = useState<Date | undefined>(new Date());
+  const [timePickerOpen, setTimePickerOpen] = useState(false);
+  const [datePickerOpen, setDatePickerOpen] = useState(false);
+
+  const theme = {
+    roundness: 20,
+    version: 3,
+    dark: true,
+    colors: {
+      ...MD2DarkTheme.colors,
+      primary: tokens.colors.medium,
+      surface: tokens.colors.surface,
+    },
+  };
+
+  const inputTheme = {
+    roundness: tokens.borderRadius / 2,
+    colors: {
+      ...DefaultTheme.colors,
+      primary: tokens.colors.white,
+      onSurface: tokens.colors.white,
+      secondary: tokens.colors.white,
+      onSurfaceVariant: tokens.colors.white,
+    },
+  };
 
   return (
-    <SafeAreaView style={styles.screen}>
-      <View style={styles.row}>
-        <NumberPicker />
-        <Text style={styles.caloriesText}>Calories</Text>
-      </View>
-      <View style={styles.inputIconRow}>
-        <TextInput
-          mode="outlined"
-          style={styles.input}
-          label="Entry Name"
-          theme={{
-            roundness: tokens.borderRadius / 2,
-            colors: {
-              primary: tokens.colors.white,
-              onSurface: tokens.colors.white,
-            },
+    <PaperProvider theme={theme}>
+      <SafeAreaView style={styles.screen}>
+        <View style={styles.row}>
+          <NumberPicker />
+          <Text style={styles.caloriesText}>Calories</Text>
+        </View>
+        <View style={styles.inputIconRow}>
+          <TextInput
+            mode="outlined"
+            style={styles.input}
+            label="Entry Name"
+            theme={inputTheme}
+            selectionColor={tokens.colors.light}
+            onChangeText={() => {}}
+          />
+          <Icon
+            name="drive-file-rename-outline"
+            color={tokens.colors.white}
+            size={36}
+          />
+        </View>
+        <TouchableOpacity
+          onPress={() => {
+            setTimePickerOpen(true);
           }}
-          selectionColor={tokens.colors.light}
-          onChangeText={setLabel}
-        />
-        <Icon
-          name="drive-file-rename-outline"
-          color={tokens.colors.white}
-          size={36}
-        />
-      </View>
-      <View style={styles.inputIconRow}>
-        <TextInput
-          mode="outlined"
-          style={styles.input}
-          label="Time"
-          theme={{
-            roundness: tokens.borderRadius / 2,
-            colors: {
-              primary: tokens.colors.white,
-              onSurface: tokens.colors.white,
-            },
+          style={styles.inputIconRow}>
+          <TimePickerModal
+            visible={timePickerOpen}
+            onDismiss={() => {
+              setTimePickerOpen(false);
+            }}
+            onConfirm={() => {
+              setTimePickerOpen(false);
+            }}
+            hours={12}
+            minutes={0}
+            label="Select time"
+            uppercase={false}
+            cancelLabel="Cancel"
+            confirmLabel="Ok"
+            animationType="fade"
+            locale="en"
+          />
+          <TextInput
+            pointerEvents="none"
+            editable={false}
+            mode="outlined"
+            style={styles.input}
+            label="Time"
+            theme={inputTheme}
+          />
+          <Icon name="schedule" color={tokens.colors.white} size={36} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.inputIconRow}
+          onPress={() => {
+            setDatePickerOpen(true);
+          }}>
+          <DatePickerModal
+            locale="en"
+            mode="single"
+            visible={datePickerOpen}
+            onDismiss={() => {
+              setDatePickerOpen(false);
+            }}
+            onConfirm={() => {
+              setDatePickerOpen(false);
+            }}
+          />
+          <TextInput
+            pointerEvents="none"
+            editable={false}
+            mode="outlined"
+            style={styles.input}
+            label="Date"
+            theme={inputTheme}
+          />
+          <Icon name="calendar-today" color={tokens.colors.white} size={36} />
+        </TouchableOpacity>
+        <CustomButton
+          contentNode={
+            <View style={styles.row}>
+              <Icon name="playlist-add" color={tokens.colors.white} size={24} />
+              <Text style={styles.buttonText}>Add Entry</Text>
+            </View>
+          }
+          onPress={() => {
+            navigation.pop();
           }}
-          selectionColor={tokens.colors.light}
-          onChangeText={() => {}}
+          backgroundColor={tokens.colors.highElevation}
         />
-        <Icon name="schedule" color={tokens.colors.white} size={36} />
-      </View>
-      <View style={styles.inputIconRow}>
-        <TextInput
-          mode="outlined"
-          style={styles.input}
-          label="Date"
-          theme={{
-            roundness: tokens.borderRadius / 2,
-            colors: {
-              primary: tokens.colors.white,
-              onSurface: tokens.colors.white,
-            },
-          }}
-          selectionColor={tokens.colors.light}
-          onChangeText={() => {}}
-        />
-        <Icon name="calendar-today" color={tokens.colors.white} size={36} />
-      </View>
-      <CustomButton
-        contentNode={
-          <View style={styles.row}>
-            <Icon name="playlist-add" color={tokens.colors.white} size={24} />
-            <Text style={styles.buttonText}>Add Entry</Text>
-          </View>
-        }
-        onPress={() => {
-          navigation.pop();
-        }}
-        backgroundColor={tokens.colors.highElevation}
-      />
-    </SafeAreaView>
+      </SafeAreaView>
+    </PaperProvider>
   );
 }
 
@@ -120,7 +170,7 @@ const styles = StyleSheet.create({
   },
   input: {
     marginRight: tokens.spacing.half,
-    height: 40,
+    height: 50,
     width: 200,
     backgroundColor: tokens.colors.surface,
   },
