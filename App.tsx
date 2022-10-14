@@ -7,7 +7,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import DashboardScreen from './src/screens/DashboardScreen';
 import tokens from './src/utilities/Tokens';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {StatusBar, StyleSheet, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AppContext from './src/utilities/AppContext';
 import {CalorieEntry} from './src/utilities/Types';
@@ -36,6 +36,7 @@ const App = () => {
     <View style={styles.app}>
       <AppContext.Provider value={appVariables}>
         <NavigationContainer>
+          <StatusBar animated={true} backgroundColor={tokens.colors.surface} />
           <Stack.Navigator
             screenOptions={{
               title: '',
