@@ -1,6 +1,6 @@
 export interface CalorieEntry {
   key: number;
-  number: number;
+  calories: number;
   label: string;
   timestamp: Date;
   icon: string;

@@ -15,7 +15,7 @@ function RecentEntries() {
       <View style={styles.entryContainer}>
         <View style={styles.calorieNumContainer}>
           <Text style={styles.largeText}>
-            {item.number} <Text style={styles.smallText}>kCal</Text>
+            {item.calories} <Text style={styles.smallText}>kCal</Text>
           </Text>
         </View>
         <View style={styles.spacer} />
@@ -36,7 +36,7 @@ function RecentEntries() {
             color={tokens.colors.light}
             size={24}
           />
-          <Text style={styles.smallText}>12:15pm</Text>
+          <Text style={styles.smallText}>{item.timestamp.toString()}</Text>
         </View>
       </View>
     );
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     height: tokens.spacing.half,
   },
   entryContainer: {
-    minWidth: 150,
+    maxWidth: 200,
     backgroundColor: tokens.colors.highElevation,
     padding: tokens.spacing.half,
     marginRight: tokens.spacing.regular,

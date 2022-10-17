@@ -8,30 +8,38 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import tokens from '../utilities/Tokens';
-import {DefaultTheme, MD2DarkTheme, TextInput} from 'react-native-paper';
+import {
+  DefaultTheme,
+  MD2DarkTheme,
+  MD3DarkTheme,
+  TextInput,
+} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import CustomButton from '../components/CustomButton';
 import {NavigationContext} from '@react-navigation/native';
 import NumberPicker from '../components/NumberPicker';
 import {DatePickerModal, TimePickerModal} from 'react-native-paper-dates';
 import {Provider as PaperProvider} from 'react-native-paper';
+import Moment from 'moment';
+import AppContext from '../utilities/AppContext';
 
-function DashboardScreen() {
+function NewEntryScreen() {
   const navigation = useContext<any>(NavigationContext);
-  // const [number, setNumber] = useState<number>();
-  // const [label, setLabel] = useState<string | undefined>();
-  // const [timestamp, setTimestamp] = useState<Date | undefined>(new Date());
+  const appContext = useContext(AppContext);
+  const [calories, setCalories] = useState<number>(200);
+  const [label, setLabel] = useState<string | undefined>();
+  const [time, setTime] = useState<Date>();
+  const [date, setDate] = useState<Date>();
   const [timePickerOpen, setTimePickerOpen] = useState(false);
   const [datePickerOpen, setDatePickerOpen] = useState(false);
 
   const theme = {
+    ...MD3DarkTheme,
     roundness: 20,
-    version: 3,
     dark: true,
     colors: {
       ...MD2DarkTheme.colors,
-      primary: tokens.colors.medium,
-      surface: tokens.colors.surface,
+      primary: tokens.colors.dark,
     },
   };
 
@@ -46,11 +54,37 @@ function DashboardScreen() {
     },
   };
 
+  function onSubmit() {
+    let entries = appContext.calorieEntries;
+
+    let finalDate = date === undefined ? new Date() : date;
+    let finalTime = time === undefined ? new Date() : time;
+
+    let timestamp = finalDate.setTime(finalTime.getTime());
+
+    let newEntry = [
+      {
+        key: entries.length,
+        calories: calories,
+        label: label,
+        timestamp: timestamp,
+        icon: 'food-outline',
+      },
+    ];
+
+    entries = newEntry.concat(entries);
+    appContext.setCalorieEntries(entries);
+    appContext.setTotalCalories(
+      (appContext.totalCalories as number) + calories,
+    );
+    navigation.pop();
+  }
+
   return (
     <PaperProvider theme={theme}>
       <SafeAreaView style={styles.screen}>
         <View style={styles.row}>
-          <NumberPicker />
+          <NumberPicker updateCallback={setCalories} />
           <Text style={styles.caloriesText}>Calories</Text>
         </View>
         <View style={styles.inputIconRow}>
@@ -60,7 +94,10 @@ function DashboardScreen() {
             label="Entry Name"
             theme={inputTheme}
             selectionColor={tokens.colors.light}
-            onChangeText={() => {}}
+            onChangeText={text => {
+              setLabel(text);
+            }}
+            value={label}
           />
           <Icon
             name="drive-file-rename-outline"
@@ -78,7 +115,11 @@ function DashboardScreen() {
             onDismiss={() => {
               setTimePickerOpen(false);
             }}
-            onConfirm={() => {
+            onConfirm={props => {
+              const newTime = new Date();
+              newTime.setHours(props.hours);
+              newTime.setMinutes(props.minutes);
+              setTime(newTime);
               setTimePickerOpen(false);
             }}
             hours={12}
@@ -97,6 +138,7 @@ function DashboardScreen() {
             style={styles.input}
             label="Time"
             theme={inputTheme}
+            value={time === undefined ? 'Now' : Moment(time).format('h:mm A')}
           />
           <Icon name="schedule" color={tokens.colors.white} size={36} />
         </TouchableOpacity>
@@ -112,7 +154,8 @@ function DashboardScreen() {
             onDismiss={() => {
               setDatePickerOpen(false);
             }}
-            onConfirm={() => {
+            onConfirm={props => {
+              setDate(props.date);
               setDatePickerOpen(false);
             }}
           />
@@ -123,6 +166,7 @@ function DashboardScreen() {
             style={styles.input}
             label="Date"
             theme={inputTheme}
+            value={date === undefined ? 'Today' : date.toString()}
           />
           <Icon name="calendar-today" color={tokens.colors.white} size={36} />
         </TouchableOpacity>
@@ -133,9 +177,7 @@ function DashboardScreen() {
               <Text style={styles.buttonText}>Add Entry</Text>
             </View>
           }
-          onPress={() => {
-            navigation.pop();
-          }}
+          onPress={onSubmit}
           backgroundColor={tokens.colors.highElevation}
         />
       </SafeAreaView>
@@ -176,4 +218,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DashboardScreen;
+export default NewEntryScreen;
