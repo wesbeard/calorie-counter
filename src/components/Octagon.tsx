@@ -32,7 +32,7 @@ function Octagon() {
         <Text style={styles.largeText}>{totalCalories}</Text>
         <View style={styles.spacer} />
         <Text style={styles.extraSmallText}>
-          {(totalCalories / calorieGoal) * 100}% of
+          {Math.round((totalCalories / calorieGoal) * 100 * 100) / 100}% of
         </Text>
         <Text style={styles.extraSmallText}>{calorieGoal} Daily</Text>
       </View>

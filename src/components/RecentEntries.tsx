@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
     height: tokens.spacing.half,
   },
   entryContainer: {
+    overflow: 'hidden',
     width: 200,
     backgroundColor: tokens.colors.highElevation,
     padding: tokens.spacing.half,

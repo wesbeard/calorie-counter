@@ -21,7 +21,7 @@ function NumberPicker(props: NumberPickerProps) {
       selectedIndex={selectedIndex}
       options={DATA}
       onChange={index => {
-        props.updateCallback(DATA[index]);
+        props.updateCallback(Number(DATA[index]));
         setSelectedIndex(index);
       }}
       selectedIndicatorStyle={styles.selectedIndicator}

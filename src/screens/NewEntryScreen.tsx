@@ -22,6 +22,7 @@ import {DatePickerModal, TimePickerModal} from 'react-native-paper-dates';
 import {Provider as PaperProvider} from 'react-native-paper';
 import Moment from 'moment';
 import AppContext from '../utilities/AppContext';
+import {CalorieEntry} from '../utilities/Types';
 
 function NewEntryScreen() {
   const navigation = useContext<any>(NavigationContext);
@@ -55,25 +56,32 @@ function NewEntryScreen() {
   };
 
   function onSubmit() {
-    let entries = appContext.calorieEntries;
+    let entries = appContext.calorieEntries as CalorieEntry[];
 
+    let finalLabel = label === undefined ? 'Entry' : label;
     let finalDate = date === undefined ? new Date() : date;
     let finalTime = time === undefined ? new Date() : time;
 
-    let timestamp = finalDate.setTime(finalTime.getTime());
+    let timestamp = finalDate;
+    timestamp.setHours(finalTime.getHours());
+    timestamp.setMinutes(finalTime.getMinutes());
 
     let newEntry = [
       {
         key: entries.length,
         calories: calories,
-        label: label,
+        label: finalLabel,
         timestamp: timestamp,
         icon: 'food-outline',
       },
     ];
 
     entries = newEntry.concat(entries);
-    appContext.setCalorieEntries(entries);
+    let sortedEntries = entries.sort(
+      (entryA, entryB) =>
+        entryB.timestamp.getTime() - entryA.timestamp.getTime(),
+    );
+    appContext.setCalorieEntries(sortedEntries);
 
     appContext.setTotalCalories(appContext.totalCalories + calories);
 
