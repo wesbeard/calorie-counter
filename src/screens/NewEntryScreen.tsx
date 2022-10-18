@@ -166,7 +166,9 @@ function NewEntryScreen() {
             style={styles.input}
             label="Date"
             theme={inputTheme}
-            value={date === undefined ? 'Today' : date.toString()}
+            value={
+              date === undefined ? 'Today' : Moment(date).format('M/D/YYYY')
+            }
           />
           <Icon name="calendar-today" color={tokens.colors.white} size={36} />
         </TouchableOpacity>

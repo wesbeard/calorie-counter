@@ -53,6 +53,7 @@ function RecentEntries() {
             {Moment(item.timestamp).format('M/D/YY')}
           </Text>
         </View>
+        <View style={styles.spacer} />
       </View>
     );
   };
