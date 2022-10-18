@@ -5,6 +5,7 @@ import AppContext from '../utilities/AppContext';
 import tokens from '../utilities/Tokens';
 import {CalorieEntry} from '../utilities/Types';
 import Card from './Card';
+import Moment from 'moment';
 
 function RecentEntries() {
   const appContext = useContext(AppContext);
@@ -32,11 +33,25 @@ function RecentEntries() {
         <View style={[styles.iconLabelRow]}>
           <Icon
             style={styles.icon}
-            name="timetable"
+            name="clock-outline"
             color={tokens.colors.light}
             size={24}
           />
-          <Text style={styles.smallText}>{item.timestamp.toString()}</Text>
+          <Text style={styles.smallText}>
+            {Moment(item.timestamp).format('h:mm A')}
+          </Text>
+        </View>
+        <View style={styles.spacer} />
+        <View style={[styles.iconLabelRow]}>
+          <Icon
+            style={styles.icon}
+            name="calendar"
+            color={tokens.colors.light}
+            size={24}
+          />
+          <Text style={styles.smallText}>
+            {Moment(item.timestamp).format('M/D/YY')}
+          </Text>
         </View>
       </View>
     );
@@ -68,7 +83,7 @@ const styles = StyleSheet.create({
     height: tokens.spacing.half,
   },
   entryContainer: {
-    maxWidth: 200,
+    width: 200,
     backgroundColor: tokens.colors.highElevation,
     padding: tokens.spacing.half,
     marginRight: tokens.spacing.regular,
@@ -83,7 +98,7 @@ const styles = StyleSheet.create({
     padding: tokens.spacing.half,
   },
   iconLabelRow: {
-    paddingLeft: tokens.spacing.quarter,
+    paddingLeft: tokens.spacing.half,
     flexDirection: 'row',
     alignItems: 'center',
   },

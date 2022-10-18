@@ -21,8 +21,8 @@ registerTranslation('en', en);
 const App = () => {
   const [calorieEntries, setCalorieEntries] =
     useState<CalorieEntry[]>(TEST_DATA);
-  const [totalCalories, setTotalCalories] = useState(1000);
-  const [calorieGoal, setCalorieGoal] = useState(2000);
+  const [totalCalories, setTotalCalories] = useState<number>(1000);
+  const [calorieGoal, setCalorieGoal] = useState<number>(2000);
   const appVariables = {
     calorieEntries,
     setCalorieEntries,

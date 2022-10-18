@@ -74,9 +74,9 @@ function NewEntryScreen() {
 
     entries = newEntry.concat(entries);
     appContext.setCalorieEntries(entries);
-    appContext.setTotalCalories(
-      (appContext.totalCalories as number) + calories,
-    );
+
+    appContext.setTotalCalories(appContext.totalCalories + calories);
+
     navigation.pop();
   }
 
