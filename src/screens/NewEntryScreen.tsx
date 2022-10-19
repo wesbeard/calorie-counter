@@ -82,7 +82,6 @@ function NewEntryScreen() {
         entryB.timestamp.getTime() - entryA.timestamp.getTime(),
     );
     appContext.setCalorieEntries(sortedEntries);
-
     appContext.setTotalCalories(appContext.totalCalories + calories);
 
     navigation.pop();
@@ -130,8 +129,8 @@ function NewEntryScreen() {
               setTime(newTime);
               setTimePickerOpen(false);
             }}
-            hours={12}
-            minutes={0}
+            hours={new Date().getHours()}
+            minutes={new Date().getMinutes()}
             label="Select time"
             uppercase={false}
             cancelLabel="Cancel"
