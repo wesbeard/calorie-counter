@@ -9,7 +9,7 @@ import Moment from 'moment';
 
 function RecentEntries() {
   const appContext = useContext(AppContext);
-  const calorieEntries = appContext.calorieEntries;
+  const calorieEntries = appContext.calorieEntries as CalorieEntry[];
 
   const renderItem = ({item}: {item: CalorieEntry}) => {
     return (
@@ -63,14 +63,26 @@ function RecentEntries() {
       title="Recent Entries"
       onHeaderPress={() => {}}
       innerContent={
-        <FlatList
-          horizontal={true}
-          style={styles.list}
-          data={calorieEntries}
-          renderItem={renderItem}
-          indicatorStyle="white"
-          persistentScrollbar
-        />
+        calorieEntries.length > 0 ? (
+          <FlatList
+            horizontal={true}
+            style={styles.list}
+            data={calorieEntries}
+            renderItem={renderItem}
+            indicatorStyle="white"
+            persistentScrollbar
+          />
+        ) : (
+          <View style={styles.noEntriesContainer}>
+            <Icon
+              style={styles.alertIcon}
+              name="alert-rhombus-outline"
+              size={48}
+              color={tokens.colors.light}
+            />
+            <Text style={styles.mediumText}>No Calories Entered Yet</Text>
+          </View>
+        )
       }
     />
   );
@@ -121,6 +133,16 @@ const styles = StyleSheet.create({
   smallText: {
     color: tokens.colors.white,
     fontSize: tokens.fontSizes.SM,
+  },
+  noEntriesContainer: {
+    height: 70,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    width: tokens.fullWidth,
+  },
+  alertIcon: {
+    marginRight: tokens.spacing.half,
   },
 });
 

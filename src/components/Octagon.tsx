@@ -4,9 +4,6 @@ import {Defs, LinearGradient, Path, Stop, Svg} from 'react-native-svg';
 import AppContext from '../utilities/AppContext';
 import tokens from '../utilities/Tokens';
 
-// Points for a 300x300 SVG Octagon:
-// 150 0, 250 50, 300 150, 250 250, 150 300, 50 250, 0 150, 50 50
-
 function Octagon() {
   const appContext = useContext(AppContext);
   const totalCalories = appContext.totalCalories;
@@ -31,10 +28,10 @@ function Octagon() {
         <View style={styles.spacer} />
         <Text style={styles.largeText}>{totalCalories}</Text>
         <View style={styles.spacer} />
-        <Text style={styles.extraSmallText}>
+        <Text style={styles.smallText}>
           {Math.round((totalCalories / calorieGoal) * 100 * 100) / 100}% of
         </Text>
-        <Text style={styles.extraSmallText}>{calorieGoal} Daily</Text>
+        <Text style={styles.smallText}>{calorieGoal} Daily</Text>
       </View>
     </View>
   );
