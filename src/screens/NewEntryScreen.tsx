@@ -77,11 +77,12 @@ function NewEntryScreen() {
     ];
 
     entries = newEntry.concat(entries);
-    let sortedEntries = entries.sort(
+    entries = entries.sort(
       (entryA, entryB) =>
         entryB.timestamp.getTime() - entryA.timestamp.getTime(),
     );
-    appContext.setCalorieEntries(sortedEntries);
+
+    appContext.setCalorieEntries(entries);
     appContext.setTotalCalories(appContext.totalCalories + calories);
 
     navigation.pop();
@@ -158,6 +159,9 @@ function NewEntryScreen() {
             locale="en"
             mode="single"
             visible={datePickerOpen}
+            validRange={{
+              endDate: new Date(),
+            }}
             onDismiss={() => {
               setDatePickerOpen(false);
             }}

@@ -2,16 +2,14 @@
  * @format
  */
 
-import React, {useState} from 'react';
+import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import DashboardScreen from './src/screens/DashboardScreen';
 import tokens from './src/utilities/Tokens';
 import {StatusBar, StyleSheet, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import AppContext from './src/utilities/AppContext';
-import {CalorieEntry} from './src/utilities/Types';
-import {TEST_DATA} from './src/utilities/TestData';
+import {AppContextProvider} from './src/utilities/AppContext';
 import NewEntryScreen from './src/screens/NewEntryScreen';
 import {en, registerTranslation} from 'react-native-paper-dates';
 
@@ -19,23 +17,9 @@ const Stack = createNativeStackNavigator();
 registerTranslation('en', en);
 
 const App = () => {
-  const [calorieEntries, setCalorieEntries] =
-    useState<CalorieEntry[]>(TEST_DATA);
-  const [totalCalories, setTotalCalories] = useState<number>(0);
-  const [calorieGoal, setCalorieGoal] = useState<number>(2000);
-
-  const appVariables = {
-    calorieEntries,
-    setCalorieEntries,
-    totalCalories,
-    setTotalCalories,
-    calorieGoal,
-    setCalorieGoal,
-  };
-
   return (
     <View style={styles.app}>
-      <AppContext.Provider value={appVariables}>
+      <AppContextProvider>
         <NavigationContainer>
           <StatusBar animated={true} backgroundColor={tokens.colors.surface} />
           <Stack.Navigator
@@ -76,7 +60,7 @@ const App = () => {
             />
           </Stack.Navigator>
         </NavigationContainer>
-      </AppContext.Provider>
+      </AppContextProvider>
     </View>
   );
 };

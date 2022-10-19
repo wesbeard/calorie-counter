@@ -21,7 +21,9 @@ function DashboardScreen() {
 
   return (
     <SafeAreaView>
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView
+        nestedScrollEnabled={true}
+        contentContainerStyle={styles.container}>
         <Octagon />
         <View style={styles.spacer} />
         <RecentEntries />
