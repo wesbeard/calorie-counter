@@ -6,12 +6,24 @@ import tokens from '../utilities/Tokens';
 import {CalorieEntry} from '../utilities/Types';
 import Card from './Card';
 import Moment from 'moment';
+import {areDaysEqual} from '../utilities/DateFunctions';
 
 function RecentEntries() {
   const appContext = useContext(AppContext);
   const calorieEntries = appContext.calorieEntries as CalorieEntry[];
 
   const renderItem = ({item}: {item: CalorieEntry}) => {
+    let dateString = Moment(item.timestamp).format('M/D/YY');
+    let today = new Date();
+    let yesterday = new Date();
+    yesterday.setDate(today.getDate() - 1);
+
+    if (areDaysEqual(today, item.timestamp)) {
+      dateString = 'Today';
+    } else if (areDaysEqual(yesterday, item.timestamp)) {
+      dateString = 'Yesterday';
+    }
+
     return (
       <View style={styles.entryContainer}>
         <View style={styles.calorieNumContainer}>
@@ -49,9 +61,7 @@ function RecentEntries() {
             color={tokens.colors.light}
             size={24}
           />
-          <Text style={styles.smallText}>
-            {Moment(item.timestamp).format('M/D/YY')}
-          </Text>
+          <Text style={styles.smallText}>{dateString}</Text>
         </View>
         <View style={styles.spacer} />
       </View>

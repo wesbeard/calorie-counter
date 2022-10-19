@@ -1,6 +1,7 @@
 import React, {ReactNode, useEffect, useState} from 'react';
 import {CalorieEntry} from './Types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {areDaysEqual} from './DateFunctions';
 
 const AppContext = React.createContext<any>(undefined);
 
@@ -44,15 +45,10 @@ export function AppContextProvider(props: AppContextProps) {
   useEffect(() => {
     saveEntries(calorieEntries);
 
-    const now = new Date();
     let total = 0;
 
     calorieEntries.forEach(entry => {
-      if (
-        entry.timestamp.getDay() === now.getDay() &&
-        entry.timestamp.getMonth() === now.getMonth() &&
-        entry.timestamp.getFullYear() === now.getFullYear()
-      ) {
+      if (areDaysEqual(new Date(), entry.timestamp)) {
         total += entry.calories;
       }
     });
